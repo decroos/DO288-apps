@@ -12,10 +12,9 @@ COPY src/ /usr/share/nginx/html
 RUN yum install -y --disableplugin=subscription-manager --nodocs \
   nginx nginx-mod-http-perl && \
   yum clean all && \
-
    touch /run/nginx.pid && \
     chgrp -R 0 /var/log/nginx /run/nginx.pid && \
-    chmod -R g=u /var/log/nginx /run/nginx.pid
+    chmod -R g=rwx /var/log/nginx /run/nginx.pid
   
 
 COPY     nginx.conf /etc/nginx/
