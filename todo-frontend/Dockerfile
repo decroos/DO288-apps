@@ -7,17 +7,18 @@ LABEL version="1.0" \
 
 ENV BACKEND_HOST=localhost:8081
 
+COPY src/ /usr/share/nginx/html 
+
 RUN yum install -y --disableplugin=subscription-manager --nodocs \
   nginx nginx-mod-http-perl && \
-  yum clean all
-
-COPY nginx.conf /etc/nginx/
+  yum clean all 
 
 RUN touch /run/nginx.pid && \
     chgrp -R 0 /var/log/nginx /run/nginx.pid && \
     chmod -R g=u /var/log/nginx /run/nginx.pid
   
-COPY src/ /usr/share/nginx/html
+
+COPY     nginx.conf /etc/nginx/
 
 EXPOSE 8080
 
